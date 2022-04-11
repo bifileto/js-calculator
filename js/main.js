@@ -1,16 +1,23 @@
 let buttons = document.querySelectorAll('button');
 let buttonId;
+
 var calculator = document.querySelector(".calculator");
 var display = calculator.querySelector(".display");
 var displayOld = display.querySelector("#dold");
 var displayNew = display.querySelector("#dnew");
 var memoriaGeral;
 
+
 function getId (buttons){
   buttonId = buttons.id;
   console.log(buttonId);
 
+ 
+ 
+ 
+ 
   //Controller das operações aritméticas
+  
   switch (buttonId)
   {
     case "igual":
@@ -21,6 +28,7 @@ function getId (buttons){
     break;
     case "sum":
       console.log("vai acrescentar + e mostrar no newDisplay");
+      soma(memoriaGeral, b)
     break;
     case "prod":
       console.log("vai acrescentar * e mostrar no newDisplay");
@@ -35,12 +43,12 @@ function getId (buttons){
       console.log("vai deletar a memoria e atualizar no newDisplay");
     break;
   }
-  displayNew.textContent += buttons.value;
+  if(buttons.className == "number"|| buttons.className == "aritmetica")
+  {
+    displayNew.textContent += buttons.value;
+  }
 }
-/*  function selecionar (){
-  let a = document.getElementById();
-  let b = document.getElementById();
-}*/
+
 
 function soma (newNumber,memory){
   return memory + newNumber;
