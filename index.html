@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <link href= "css/style.css" rel="stylesheet">
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora</title>
+    <link href="css/style.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
 </head>
+
 <body>
-  <div class="calculator">
-    <div class="display">
-      <div class="oldNumber" id="dold"></div>
-      <div class="newNumber" id="dnew"></div>
-   </div>
-    <div class="buttons">   
-      <button class="logical" type="button" id="ac" onclick="getId(this)">AC</button>   
-      <button class="logical" type="button" id="del" onclick="getId(this)">DEL</button> 
-      <button class="aritmetica" type="button" id="div" value="/" onclick="getId(this)">/</button>   
-      <button class="aritmetica" type="button" id="prod" value="*" onclick="getId(this)">*</button>  
-      <button class="number" type="button" id="7" value="7" onclick="getId(this)">7</button>
-      <button class="number" type="button" id="8" value="8" onclick="getId(this)">8</button>    
-      <button class="number" type="button" id="9" value="9" onclick="getId(this)">9</button>  
-      <button class="aritmetica" type="button" id="sub" value="-" onclick="getId(this)">-</button>  
-      <button class="number" type="button" id="4" value="4" onclick="getId(this)">4</button>  
-      <button class="number" type="button" id="5" value="5" onclick="getId(this)">5</button>  
-      <button class="number" type="button" id="6" value="6" onclick="getId(this)">6</button>  
-      <button class="aritmetica" type="button" id="sum" value="+" onclick="getId(this)">+</button>
-      <button class="number" type="button" id="1" value="1" onclick="getId(this)">1</button>    
-      <button class="number" type="button" id="2" value="2" onclick="getId(this)">2</button>   
-      <button class="number" type="button" id="3" value="3" onclick="getId(this)">3</button>
-      <button class="functions" type="button" id="igual" onclick="getId(this)">=</button> 
-      <button class="functions" type="button" id="zero" value="0" onclick="getId(this)">0</button>  
-      <button class="aritmetica" type="button" id="dot" onclick="getId(this)">.</button>
+    <div class="calculator">
+        <div class="display">
+            <div class="oldNumber" id="dold"></div>
+            <div class="newNumber" id="dnew"></div>
+        </div>
+        <div class="buttons">
+            <button class="acao" type="button" id="ac" onclick="Principal(this)">AC</button>
+            <button class="acao" type="button" id="del" onclick="Principal(this)">DEL</button>
+            <button class="operacao" type="button" id="div" value="/" onclick="Principal(this)">/</button>
+            <button class="operacao" type="button" id="prod" value="*" onclick="Principal(this)">*</button>
+            <button class="numero" type="button" id="7" value="7" onclick="Principal(this)">7</button>
+            <button class="numero" type="button" id="8" value="8" onclick="Principal(this)">8</button>
+            <button class="numero" type="button" id="9" value="9" onclick="Principal(this)">9</button>
+            <button class="operacao" type="button" id="sub" value="-" onclick="Principal(this)">-</button>
+            <button class="numero" type="button" id="4" value="4" onclick="Principal(this)">4</button>
+            <button class="numero" type="button" id="5" value="5" onclick="Principal(this)">5</button>
+            <button class="numero" type="button" id="6" value="6" onclick="Principal(this)">6</button>
+            <button class="operacao" type="button" id="sum" value="+" onclick="Principal(this)">+</button>
+            <button class="numero" type="button" id="1" value="1" onclick="Principal(this)">1</button>
+            <button class="numero" type="button" id="2" value="2" onclick="Principal(this)">2</button>
+            <button class="numero" type="button" id="3" value="3" onclick="Principal(this)">3</button>
+            <button class="operacao" type="button" id="igual" onclick="Principal(this)">=</button>
+            <button class="numero" type="button" id="zero" value="0" onclick="Principal(this)">0</button>
+            <button class="numero" type="button" id="dot" value="." onclick=" Principal(this)">.</button>
+        </div>
     </div>
-  </div>
-  <script src="js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
+
 </html>

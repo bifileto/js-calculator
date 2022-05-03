@@ -1,55 +1,144 @@
 let buttons = document.querySelectorAll('button');
 let buttonId;
+let buttonClass;
+let memoriaFinal = "";
+let memoriaVolatil = "";
+let operacao = "";
+let calculator = document.querySelector(".calculator");
+let display = calculator.querySelector(".display");
+let displayOld = display.querySelector("#dold");
+let displayNew = display.querySelector("#dnew");
 
-var calculator = document.querySelector(".calculator");
-var display = calculator.querySelector(".display");
-var displayOld = display.querySelector("#dold");
-var displayNew = display.querySelector("#dnew");
-var memoriaGeral;
 
+//função de entrada do programa
+function Principal(buttons) {
+    buttonClass = buttons.className;
+    switch (buttonClass) {
+        case "acao":
+            Acao(buttons);
+            break;
+        case "operacao":
+            if (VerificaDisplay(buttons)) {
+                Operacao(buttons);
+            }
+            break;
+        case "numero":
+            if (VerificaDisplay(buttons)) {
+                Agregacao(buttons);
+            }
+    }
+}
+//função quase completa - falta revisão
+function VerificaDisplay(buttons) {
+    if (displayNew.textContent.length >= 12 || displayOld.textContent.length >= 48) {
+        alert("Numero máximo de caracteres alcançado!")
+        return false;
+    }
+    return true;
+}
+//função quase completa - falta revisão
+function Agregacao(button) {
+    if (button.value == ".") {
+        if (!memoriaVolatil.includes(".")) {
+            if (memoriaVolatil == null)
+                memoriaVolatil = "0.";
+            else
+                memoriaVolatil += button.value;
+        } else {
+            alert("Não é possível inserir duas pontuações!");
+        }
+    } else {
+        memoriaVolatil += button.value;
+    }
+    AtualizaNewDisplay(memoriaVolatil);
+}
+//função quase completa - falta revisar
+function Acao(buttons) {
+    buttonId = buttons.id;
+    switch (buttonId) {
+        case "ac":
+            ResetaCalc();
+            break;
+        case "del":
+            DeletaAnterior();
+            break;
+    }
+}
+//função quase completa - falta revisar
+function Operacao(buttons) {
+    if (operacao == "" && buttons.id != "igual") {
+        memoriaFinal = memoriaVolatil;
+        memoriaVolatil = "";
+        operacao = buttons.id;
+        AtualizaOldDisplay(memoriaFinal + buttons.textContent);
 
-function getId (buttons){
-  buttonId = buttons.id;
-  console.log(buttonId);
-
- 
- 
- 
- 
-  //Controller das operações aritméticas
-  
-  switch (buttonId)
-  {
-    case "igual":
-      console.log("vai passar para memoria e mostrar no newDisplay e oldDisplay");
-    break;
-    case "sub":
-      console.log("vai acrescentar - e mostrar no newDisplay");
-    break;
-    case "sum":
-      console.log("vai acrescentar + e mostrar no newDisplay");
-      soma(memoriaGeral, b)
-    break;
-    case "prod":
-      console.log("vai acrescentar * e mostrar no newDisplay");
-    break;
-    case "div":
-      console.log("vai acrescentar / e mostrar no newDisplay");
-    break;
-    case "del":
-      console.log("vai deletar 1 campo da memoria e atualizar no newDisplay");
-    break;
-    case "ac":
-      console.log("vai deletar a memoria e atualizar no newDisplay");
-    break;
-  }
-  if(buttons.className == "number"|| buttons.className == "aritmetica")
-  {
-    displayNew.textContent += buttons.value;
-  }
+    } else if (buttons.id == "igual") {
+        switch (operacao) {
+            case "sum":
+                memoriaFinal = Soma(memoriaFinal, memoriaVolatil);
+                break;
+            case "sub":
+                memoriaFinal = Subtracao(memoriaFinal, memoriaVolatil);
+                break;
+            case "prod":
+                memoriaFinal = Produto(memoriaFinal, memoriaVolatil);
+                break;
+            case "div":
+                if (memoriaVolatil != "0") {
+                    memoriaFinal = Divisao(memoriaFinal, memoriaVolatil);
+                    break;
+                } else
+                    alert("Divisão por Zero é inaceitável!");
+                return;
+        }
+        AtualizaOldDisplay(memoriaVolatil + "=" + memoriaFinal + " | ");
+        AtualizaNewDisplay(memoriaFinal);
+        memoriaVolatil = "";
+        operacao = "";
+    } else {
+        alert("Realiza a conclusão da conta para adicionar uma nova operação!");
+        return;
+    }
+}
+//funçao quase completa - falta revisão
+function ResetaCalc() {
+    memoriaFinal = "";
+    memoriaVolatil = "";
+    number = "";
+    displayNew.textContent = "0";
+    displayOld.textContent = "0";
+    operacao = "";
+}
+//função quase completa - falta revisão
+function AtualizaNewDisplay(valorDisplay) {
+    displayNew.textContent = valorDisplay;
+    console.log("Display Novo atualizado");
+}
+//função quase completa - falta revisão
+function AtualizaOldDisplay(valorDisplay) {
+    displayOld.textContent += valorDisplay;
+    console.log("Display Velho atualizado");
+}
+//função quase completa - falta revisão 
+function DeletaAnterior() {
+    let aux;
+    aux = memoriaVolatil.substr(0, memoriaVolatil.length - 1);
+    memoriaVolatil = aux;
+    AtualizaNewDisplay(memoriaVolatil);
+}
+//OPERACOES BINARIAS
+function Soma(princ, volatil) {
+    return parseFloat(princ) + parseFloat(volatil);
 }
 
+function Subtracao(princ, volatil) {
+    return parseFloat(princ) - parseFloat(volatil);
+}
 
-function soma (newNumber,memory){
-  return memory + newNumber;
+function Produto(princ, volatil) {
+    return parseFloat(princ) * parseFloat(volatil);
+}
+
+function Divisao(princ, volatil) {
+    return (parseFloat(princ) / parseFloat(volatil)).toFixed(2);
 }
